@@ -4,20 +4,16 @@ const { user } = require('../controllers')
 
 
 // Subrouters;
-router.post('/register',user.register);
+const usersRouter = require("./users");
 
+// Mount our subrouters to assemble our apiRouter;
+router.use("/users",usersRouter);
 
 // Error handling middleware;
 router.use((req, res, next) => {
   const error = new Error("Not Found, Please Check URL!");
   error.status = 404;
   next(error);
-});
-
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
 });
 
 // Export our apiRouter, so that it can be used by our main app in app.js;

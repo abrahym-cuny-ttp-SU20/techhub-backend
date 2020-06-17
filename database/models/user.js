@@ -7,7 +7,7 @@ const User = db.define("user", {
   phoneNumber: { type: Sequelize.STRING(15), allowNull: true },
   email: { type: Sequelize.STRING, allowNull: false, unique: true },
   password: { type: Sequelize.VIRTUAL },
-  //passwordHash: {type: Sequelize.STRING, allowNull: false},
+  passwordHash: {type: Sequelize.STRING(60), allowNull: false},
   role: { type: Sequelize.ENUM("EMPLOYER", "USER"), allowNull: false },
 });
 module.exports = User;
