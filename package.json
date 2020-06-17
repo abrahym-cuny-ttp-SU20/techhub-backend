@@ -16,13 +16,14 @@
     "helmet": "^3.23.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "passport-local": "^1.0.0",
     "pgtools": "^0.3.0",
     "prettier": "^2.0.5",
     "sequelize": "^5.21.13"
   },
   "description": "An API server to handle authentication and deliver data to front-end client.",
-  "main": "app.js",
   "devDependencies": {
+    "bcrypt": "^5.0.0",
     "nodemon": "^2.0.4"
   },
   "author": "Marlon Urena",
