@@ -1,4 +1,9 @@
 const { User, Skill, PageLink } = require("../database/models");
+const bcrypt = require("bcrypt");
+
+const hash1 = bcrypt.hashSync('password111',10);
+const hash2 = bcrypt.hashSync('password222',10);
+const hash3 = bcrypt.hashSync('password333',10);
 
 const seedDatabase = async () => {
   await Promise.all([
@@ -7,6 +12,7 @@ const seedDatabase = async () => {
       lastName: "Doe",
       phoneNumber: "333-444-5555",
       email: "john@example.com",
+      passwordHash: hash1,
       role: "USER",
     }),
     User.create({
@@ -14,6 +20,7 @@ const seedDatabase = async () => {
       lastName: "Doe",
       phoneNumber: "444-555-6666",
       email: "jane@example.com",
+      passwordHash: hash2,
       role: "USER",
     }),
     User.create({
@@ -21,6 +28,7 @@ const seedDatabase = async () => {
       lastName: "Doe",
       phoneNumber: "555-666-7777",
       email: "jack@example.com",
+      passwordHash: hash3,
       role: "USER",
     }),
       Skill.create({

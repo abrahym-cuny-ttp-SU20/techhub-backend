@@ -13,6 +13,20 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const helmet = require("helmet");
 const compression = require("compression");
+const { User } = require("./database/models")
+
+//Necessary for passport local authentication
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
+
+const initializePassport = require('./config/passport-config')
+initializePassport(
+    passport,
+    email => User.findOne({where:{email: email}}),
+    id => User.findOne({where:{id: id}})
+)
 
 // Utilities;
 const createLocalDatabase = require("./utils/createLocalDatabase");
@@ -52,6 +66,15 @@ const configureApp = () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(compression());
   app.use(cookieParser());
+  app.use(flash());
+  app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(methodOverride('_method'));
 
   // Our apiRouter
   const apiRouter = require("./routes/index");
