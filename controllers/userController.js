@@ -2,6 +2,12 @@ const { userService } = require("../services");
 const { userRegistration } = userService;
 const passport = require("passport");
 
+
+/**
+ * IGNORE THIS CONTROLLER, IT WILL NOT BE UTILIZED ATM
+ */
+
+
 const login = async (req, res, next) => {
   passport.authenticate("local", {
     failureFlash: true,
