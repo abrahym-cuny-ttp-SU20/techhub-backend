@@ -38,23 +38,26 @@ const seedDatabase = async () => {
         name: "Machine Learning",
       }),
       Skill.create({
-        name: "UI/UX"
+        name: "UI/UX",
       }),
       PageLink.create({
         title: "Jarvis AI project on Github",
         link: "https://www.github.com",
-        image: "https://via.placeholder.com/150",
+        imageURL: "https://via.placeholder.com/150",
+        userId: 1
       }),
       PageLink.create({
         title: "My LinkedIn profile page.",
         link: "https://www.linkedin.com",
-        image: "https://via.placeholder.com/150",
+        imageURL: "https://via.placeholder.com/150",
+        userId: 1
       }),
       PageLink.create({
         title: "My personal webpage",
         link: "https://www.marvel.com/characters/iron-man-tony-stark",
-        image: "https://via.placeholder.com/150",
-      })
+        imageURL: "https://via.placeholder.com/150",
+        userId: 2
+      }),
   ]);
 };
 
