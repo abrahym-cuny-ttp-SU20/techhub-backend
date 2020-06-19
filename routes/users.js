@@ -4,28 +4,18 @@ const passport = require("passport");
 const { User } = require("../database/models");
 const { userService } = require("../services");
 
-const { userRegistration } = userService;
+/**
+ * User Services
+ * Purpose: These will contain the business logic. This is to produce a separation of concerns.
+ * Request -> Route -> Service -> Route -> Response
+ */
+const { userRegistration, userProcessing } = userService;
 
 router.post("/login", passport.authenticate("local"), function (req, res) {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
-  const {
-    id,
-    firstName,
-    lastName,
-    phoneNumber,
-    email,
-    role,
-  } = req.user.dataValues;
-  const user = {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    phoneNumber: phoneNumber,
-    email: email,
-    role: role,
-  };
-  res.status(200).json(user);
+  const processedUser = userProcessing(req.user);
+  res.status(200).json(processedUser);
 });
 
 router.post("/logout", (req, res, next) => {
@@ -60,4 +50,6 @@ router.post("/signup", async (req, res, next) => {
     console.log(err);
   }
 });
+
+
 module.exports = router;
