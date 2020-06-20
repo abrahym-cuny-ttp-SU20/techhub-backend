@@ -4,9 +4,11 @@ var router = express.Router();
 
 // Subrouters;
 const usersRouter = require("./users");
+const linksRouter = require("./pageLinks");
 
 // Mount our subrouters to assemble our apiRouter;
 router.use("/users",usersRouter);
+router.use("/pageLinks",linksRouter);
 
 // Error handling middleware;
 router.use((req, res, next) => {
