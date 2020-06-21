@@ -39,9 +39,10 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
+
   try {
-    const updatedPageLink = await updatePageLink(req.body.id, req.body);
+    const updatedPageLink = await updatePageLink(req.params.id, req.body);
     res.status(201).json(updatedPageLink);
   } catch (err) {
     next(err);
