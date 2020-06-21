@@ -1,9 +1,9 @@
-const { User, Skill, PageLink } = require("../database/models");
+const { User, Skill, PageLink, UserSkill } = require("../database/models");
 const bcrypt = require("bcrypt");
 
-const hash1 = bcrypt.hashSync('password111',10);
-const hash2 = bcrypt.hashSync('password222',10);
-const hash3 = bcrypt.hashSync('password333',10);
+const hash1 = bcrypt.hashSync("password111", 10);
+const hash2 = bcrypt.hashSync("password222", 10);
+const hash3 = bcrypt.hashSync("password333", 10);
 
 const seedDatabase = async () => {
   await Promise.all([
@@ -31,33 +31,45 @@ const seedDatabase = async () => {
       passwordHash: hash3,
       role: "USER",
     }),
-      Skill.create({
-        name: "Java",
-      }),
-      Skill.create({
-        name: "Machine Learning",
-      }),
-      Skill.create({
-        name: "UI/UX",
-      }),
-      PageLink.create({
-        title: "Jarvis AI project on Github",
-        link: "https://www.github.com",
-        imageURL: "https://via.placeholder.com/150",
-        userId: 1
-      }),
-      PageLink.create({
-        title: "My LinkedIn profile page.",
-        link: "https://www.linkedin.com",
-        imageURL: "https://via.placeholder.com/150",
-        userId: 1
-      }),
-      PageLink.create({
-        title: "My personal webpage",
-        link: "https://www.marvel.com/characters/iron-man-tony-stark",
-        imageURL: "https://via.placeholder.com/150",
-        userId: 2
-      }),
+    Skill.create({
+      name: "Java",
+    }),
+    Skill.create({
+      name: "Machine Learning",
+    }),
+    Skill.create({
+      name: "UI/UX",
+    }),
+    PageLink.create({
+      title: "Jarvis AI project on Github",
+      link: "https://www.github.com",
+      imageURL: "https://via.placeholder.com/150",
+      userId: 1,
+    }),
+    PageLink.create({
+      title: "My LinkedIn profile page.",
+      link: "https://www.linkedin.com",
+      imageURL: "https://via.placeholder.com/150",
+      userId: 1,
+    }),
+    PageLink.create({
+      title: "My personal webpage",
+      link: "https://www.marvel.com/characters/iron-man-tony-stark",
+      imageURL: "https://via.placeholder.com/150",
+      userId: 2,
+    }),
+    UserSkill.create({
+      userId: 1,
+      skillId: 1,
+    }),
+    UserSkill.create({
+      userId: 1,
+      skillId: 2,
+    }),
+    UserSkill.create({
+      userId: 2,
+      skillId: 3,
+    }),
   ]);
 };
 

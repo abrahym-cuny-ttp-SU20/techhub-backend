@@ -18,7 +18,7 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
   res.status(200).json(processedUser);
 });
 
-router.post("/logout", (req, res, next) => {
+router.post("/logout", (req, res) => {
   req.logout();
   req.session.destroy(function (err) {
     if (!err) {
@@ -42,7 +42,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", async (req, res) => {
   try {
     await userRegistration(req.body);
     res.status(200);
@@ -50,6 +50,5 @@ router.post("/signup", async (req, res, next) => {
     console.log(err);
   }
 });
-
 
 module.exports = router;
