@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const { User } = require("../database/models")
+const { User } = require("../database/models");
 
 /**
  * Purpose: Creates a new user with based on request data.
@@ -30,16 +30,25 @@ const userRegistration = async (user) => {
  * @returns {{firstName: *, lastName: *, phoneNumber: *, role: *, id: *, email: *}}
  */
 const userProcessing = (user) => {
-  const { id, firstName, lastName, phoneNumber, email, role} = user.dataValues;
+  const {
+    id,
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    role,
+    profileImageURL,
+  } = user.dataValues;
 
-   return  {
+  return {
     id: id,
     firstName: firstName,
     lastName: lastName,
     phoneNumber: phoneNumber,
     email: email,
-    role: role
+    profileImageURL: profileImageURL,
+    role: role,
   };
-}
+};
 
 module.exports = { userRegistration, userProcessing };

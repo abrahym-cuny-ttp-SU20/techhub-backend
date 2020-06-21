@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-const { PageLink } = require("../database/models");
 const { pageLinkService } = require("../services");
 
 const {
@@ -10,7 +9,9 @@ const {
   deletePageLink,
 } = pageLinkService;
 
-router.get("/users/:id/links", async (req, res, next) => {
+
+
+router.get("/users/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     const links = await getUserLinks(id);
@@ -20,7 +21,7 @@ router.get("/users/:id/links", async (req, res, next) => {
   }
 });
 
-router.post("/pageLinks", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newPageLink = await addPageLink(req.body);
     res.status(201).json(newPageLink);
@@ -29,7 +30,7 @@ router.post("/pageLinks", async (req, res, next) => {
   }
 });
 
-router.delete("/pageLinks:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     await deletePageLink(req.params.id);
     res.sendStatus(204);
@@ -38,11 +39,14 @@ router.delete("/pageLinks:id", async (req, res, next) => {
   }
 });
 
-router.put("/pageLinks", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
+
   try {
-    const updatedPageLink = await updatePageLink(req.body.id, req.body);
+    const updatedPageLink = await updatePageLink(req.params.id, req.body);
     res.status(201).json(updatedPageLink);
   } catch (err) {
     next(err);
   }
 });
+
+module.exports = router;
