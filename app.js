@@ -10,6 +10,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const logger = require("morgan");
 const helmet = require("helmet");
 const compression = require("compression");
@@ -66,6 +67,7 @@ const configureApp = () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(compression());
   app.use(cookieParser());
+  app.use(cors());
   app.use(flash());
   app.use(session({
     secret: process.env.SESSION_SECRET,
